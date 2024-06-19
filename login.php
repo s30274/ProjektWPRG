@@ -2,7 +2,7 @@
 session_start();
 include_once "navbar.php";
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
-    header("location:loggedin.php");
+    header("location:index.php");
     exit;
 }
 ?>
@@ -24,21 +24,41 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 </form>
 
 <?php
-$email=$_POST['email'];
-$password=$_POST['password'];
 
-if(!empty($email)){
-    if(checkLogin($email, $password)){
-        $emaillow=strtolower($email);
-
-        $_SESSION["loggedin"] = true;
-        $_SESSION["email"] = $emaillow;
-        header('Location:index.php');
+if(isset($_POST['login'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    if (!empty($email)) {
+        $check=checkLogin($email, $password);
+        if ($check[0]==1) {
+            $emaillow = strtolower($email);
+            $_SESSION['loggedin'] = true;
+            $_SESSION['email'] = $emaillow;
+            $_SESSION['type'] = $check[1];
+            $_SESSION['active'] = $check[2];
+        }
+        else{
+            echo "<span>Podano niewłaściwe dane logowania</span>";
+        }
     }
 }
 function checkLogin($email, $password){
     $emaillow=strtolower($email);
-    return false;
+    $db = new PDO("mysql:host=localhost;dbname=sklep", "root", "");
+    $result = $db->query("SELECT * FROM Users WHERE email LIKE '$emaillow'");
+    $row=$result->fetch(PDO::FETCH_ASSOC);
+    if(empty($row)){
+        return false;
+    }
+    else{
+        $hash=$row['password'];
+        if(password_verify($password, $hash)){
+            return array(1, $row['type'], $row['active']);
+        }
+        else{
+            return array(0, 0, 0);
+        }
+    }
 }
 ?>
 

@@ -1,10 +1,28 @@
 <?php
 $db = new PDO("mysql:host=localhost;dbname=sklep", "root", "");
-$sql=("CREATE TABLE IF NOT EXISTS Sellers(
+
+//$nuke=("START TRANSACTION;
+//    DROP TABLE Items;
+//    DROP TABLE Orders;
+//    DROP TABLE Products;
+//    DROP TABLE Users;
+//COMMIT;");
+//
+//try{
+//    $db->query($nuke);
+//}
+//catch (Exception $e){
+//    echo $e;
+//}
+
+$sql=("CREATE TABLE IF NOT EXISTS Users(
 id int PRIMARY KEY AUTO_INCREMENT,
 username varchar(32) NOT NULL,
 email varchar(255) NOT NULL,
-password varchar(255) NOT NULL
+password varchar(255) NOT NULL,
+active bool DEFAULT 0,
+code varchar(6) NOT NULL,
+type enum('user', 'seller', 'admin')
 )");
 try{
     $db->query($sql);
@@ -20,20 +38,7 @@ price int NOT NULL,
 quantity int NOT NULL,
 description mediumtext NOT NULL,
 Seller_id int NOT NULL,
-FOREIGN KEY (Seller_id) REFERENCES Sellers(id)
-)");
-try{
-    $db->query($sql);
-}
-catch (Exception $e){
-    echo $e;
-}
-
-$sql=("CREATE TABLE IF NOT EXISTS Users(
-id int PRIMARY KEY AUTO_INCREMENT,
-username varchar(32) NOT NULL,
-email varchar(255) NOT NULL,
-password varchar(255) NOT NULL
+FOREIGN KEY (Seller_id) REFERENCES Users(id)
 )");
 try{
     $db->query($sql);
@@ -67,6 +72,17 @@ FOREIGN KEY (Order_id) REFERENCES Orders(id)
 try{
     $db->query($sql);
 }
-catch (Exception $e){
+catch (Exception $e) {
+    echo $e;
+}
+
+//TEMPTORARY admin account
+$sql=("
+INSERT INTO Users(username, email, password, active, code, type) VALUES ('admin', 's30274@pjwstk.edu.pl', '$2y$10$7K/L4N.4MIB0v7Ab0Jj.K.FVhwzBfxBcIXKddz6OzkiLcKXpDXuai', 1, '435723', 'admin')
+");
+try{
+    $db->query($sql);
+}
+catch(Exception $e){
     echo $e;
 }

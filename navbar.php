@@ -1,5 +1,10 @@
 <?php
 session_start();
+if(isset($_SESSION['active'])){
+    if(!$_SESSION['active']) {
+        header('Location:activate.php');
+    }
+}
 ?>
 
 <!DOCTYPE html>

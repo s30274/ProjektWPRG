@@ -19,10 +19,14 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 
 <body>
 <form method="post">
-    <input type="text" name="username" placeholder="nazwa użytkownika"><br><br>
-    <input type="text" name="email" placeholder="e-mail"><br><br>
-    <input type="password" name="password" placeholder="hasło"><br><br>
-    <input type="password" name="confirm" placeholder="potwierdź hasło"><br><br>
+    <input type="text" name="username" placeholder="Nazwa użytkownika"><br><br>
+    <input type="text" name="email" placeholder="Adres e-mail"><br><br>
+    <input type="password" name="password" placeholder="Hasło"><br><br>
+    <input type="password" name="confirm" placeholder="Potwierdź hasło"><br><br>
+    <select type="type" name="type" placeholder="Typ konta">
+        <option value="user">Użytkownik</option>
+        <option value="seller">Sprzedawca</option>
+    </select>
     <input type="submit" name="register" class="register" value="Zarejestruj się"><br>
 </form>
 
@@ -34,6 +38,7 @@ $sql=("");
     $email = $_POST['email'];
     $password = $_POST['password'];
     $confirm = $_POST['confirm'];
+    $type = $_POST['type'];
 
     if(isset($_POST['register'])) {
         if (checkUsername($username, $db)) {
@@ -42,7 +47,8 @@ $sql=("");
                     if ($password === $confirm) {
                         $emaillow = strtolower($email);
                         $hash = password_hash($password, PASSWORD_DEFAULT);
-                        $sql = ("INSERT INTO Users (username, email, password) VALUES ('$username', '$emaillow', '$hash')");
+                        $rand = rand(100000,999999);
+                        $sql = ("INSERT INTO Users (username, email, password, code, type) VALUES ('$username', '$emaillow', '$hash', '$rand', '$type')");
                         try{
                             $db->query($sql);
                         }
@@ -51,6 +57,7 @@ $sql=("");
                         }
                         $_SESSION["loggedin"] = true;
                         $_SESSION["email"] = $emaillow;
+                        $_SESSION["active"] = false;
                         header('Location:index.php');
                     }
                     else{
