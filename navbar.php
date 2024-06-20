@@ -32,7 +32,7 @@ if(isset($_SESSION['active'])){
         if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         ?>
             <li class="navbarelementright"><a href="logout.php" class="navbarlink">Wyloguj się</a></li>
-            <li class="navbarelementright"><a href="profil.php" class="navbarlink">Profil</a></li>
+            <li class="navbarelementright"><a href="profile.php" class="navbarlink">Profil</a></li>
         <?php
         } else {
         ?>

@@ -17,12 +17,12 @@ $db = new PDO("mysql:host=localhost;dbname=sklep", "root", "");
 
 $sql=("CREATE TABLE IF NOT EXISTS Users(
 id int PRIMARY KEY AUTO_INCREMENT,
-username varchar(32) NOT NULL,
-email varchar(255) NOT NULL,
-password varchar(255) NOT NULL,
-active bool DEFAULT 0,
-code varchar(6) NOT NULL,
-type enum('user', 'seller', 'admin')
+username VARCHAR(32) NOT NULL,
+email VARCHAR(255) NOT NULL,
+password VARCHAR(255) NOT NULL,
+active BOOL DEFAULT 0,
+code VARCHAR(6) NOT NULL,
+type ENUM('user', 'seller', 'admin')
 )");
 try{
     $db->query($sql);
@@ -33,11 +33,11 @@ catch (Exception $e){
 
 $sql=("CREATE TABLE IF NOT EXISTS Products(
 id int PRIMARY KEY AUTO_INCREMENT,
-name varchar(32) NOT NULL,
-price int NOT NULL,
-quantity int NOT NULL,
-description mediumtext NOT NULL,
-Seller_id int NOT NULL,
+name VARCHAR(32) NOT NULL,
+price DECIMAL(7, 2) NOT NULL,
+quantity INT NOT NULL,
+description MEDIUMTEXT NOT NULL,
+Seller_id INT NOT NULL,
 FOREIGN KEY (Seller_id) REFERENCES Users(id)
 )");
 try{
@@ -49,9 +49,13 @@ catch (Exception $e){
 
 $sql=("CREATE TABLE IF NOT EXISTS Orders(
 id int PRIMARY KEY AUTO_INCREMENT,
+city VARCHAR(255) NOT NULL,
+postcode VARCHAR(5) NOT NULL,
+address VARCHAR(255) NOT NULL,
+sum float NOT NULL,
 date date NOT NULL,
 done bool DEFAULT 0,
-User_id int NOT NULL,
+User_id INT NOT NULL,
 FOREIGN KEY (User_id) REFERENCES Users(id)
 )");
 try{
@@ -63,9 +67,9 @@ catch (Exception $e){
 
 $sql=("CREATE TABLE IF NOT EXISTS Items(
 id int PRIMARY KEY AUTO_INCREMENT,
-quantity int NOT NULL,
-Product_id int NOT NULL,
-Order_id int NOT NULL,
+quantity INT NOT NULL,
+Product_id INT NOT NULL,
+Order_id INT NOT NULL,
 FOREIGN KEY (Product_id) REFERENCES Products(id),
 FOREIGN KEY (Order_id) REFERENCES Orders(id)
 )");
