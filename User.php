@@ -1,6 +1,6 @@
 <?php
 
-class User implements Role {
+class User extends AllUsers {
     function __construct($email){
         parent::__construct($email);
     }

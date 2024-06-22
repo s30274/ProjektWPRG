@@ -10,7 +10,7 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Rejestracja - Aledrogo</title>
     <style>
         span {color: #cc0000}
         embed {padding: 0; margin: 0}
@@ -57,6 +57,7 @@ $sql=("");
                         }
                         $_SESSION["loggedin"] = true;
                         $_SESSION["email"] = $emaillow;
+                        $_SESSION["type"] = $type;
                         $_SESSION["active"] = false;
                         header('Location:index.php');
                     }

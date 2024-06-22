@@ -1,6 +1,6 @@
 <?php
 
-class Admin extends AllUsers implements Role {
+class Admin extends AllUsers {
     use ManageProduct;
 
     public function __construct($email){

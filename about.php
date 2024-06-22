@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Aledrogo</title>
+    <title>O nas - Aledrogo</title>
     <link rel="stylesheet" href="navbar.css">
 </head>
 <body>

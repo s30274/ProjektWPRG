@@ -41,6 +41,7 @@ if(isset($_SESSION['active'])){
         <?php
         }
         ?>
+        <li class="navbarelementright"><a href="basket.php" class="navbarlink">Koszyk</a></li>
 
     </ul>
 </div>

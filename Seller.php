@@ -1,6 +1,6 @@
 <?php
 
-class Seller implements Role{
+class Seller extends AllUsers {
     use ManageProduct;
 
     public function __construct($email) {

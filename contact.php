@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Aledrogo</title>
+    <title>Kontakt - Aledrogo</title>
 </head>
 <?php
 include_once "navbar.php";

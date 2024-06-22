@@ -82,11 +82,36 @@ catch (Exception $e) {
 
 //TEMPTORARY admin account
 $sql=("
-INSERT INTO Users(username, email, password, active, code, type) VALUES ('admin', 's30274@pjwstk.edu.pl', '$2y$10$7K/L4N.4MIB0v7Ab0Jj.K.FVhwzBfxBcIXKddz6OzkiLcKXpDXuai', 1, '435723', 'admin')
+INSERT INTO Users(username, email, password, active, code, type) VALUES ('admin', 'admin', '$2y$10$7K/L4N.4MIB0v7Ab0Jj.K.FVhwzBfxBcIXKddz6OzkiLcKXpDXuai', 1, '435723', 'admin');
+INSERT INTO Users(username, email, password, active, code, type) VALUES ('biokomponenty', 'biokomponenty@gmail.com', '$2y$10$43u84Fm8PTNXNq.DPoWXHeLDSpnMMC7bUTe0CtcEqkjSPAE5Okbg.', 1, '925341', 'seller');
+INSERT INTO Users(username, email, password, active, code, type) VALUES ('komputery', 'komputery@gmail.com', '$2y$10$43u84Fm8PTNXNq.DPoWXHeLDSpnMMC7bUTe0CtcEqkjSPAE5Okbg.', 1, '983459', 'seller');
+INSERT INTO Users(username, email, password, active, code, type) VALUES ('ubraniex', 'ubraniex@gmail.com', '$2y$10$43u84Fm8PTNXNq.DPoWXHeLDSpnMMC7bUTe0CtcEqkjSPAE5Okbg.', 1, '342534', 'seller');
 ");
 try{
     $db->query($sql);
 }
 catch(Exception $e){
+    echo $e;
+}
+
+$sql=("
+    INSERT INTO Products(name, price, quantity, description, seller_id) VALUES ('Woda', 2.5, 30, 'Woda źródlana 1.5 litra', 2);
+        INSERT INTO Products(name, price, quantity, description, seller_id) VALUES ('Komputer', 2000, 5, 'Szybki komputer dysk 1000 grafika gtx', 3);
+        INSERT INTO Products(name, price, quantity, description, seller_id) VALUES ('Monitor', 400, 7, 'Monitor 21 cali, matryca lcd', 3);
+        INSERT INTO Products(name, price, quantity, description, seller_id) VALUES ('Laptop', 3000, 2, 'Laptop do biura 16GB RAM', 3);
+        INSERT INTO Products(name, price, quantity, description, seller_id) VALUES ('Mąka', 3.75, 50, 'Mąka pszenna 1kg', 2);
+        INSERT INTO Products(name, price, quantity, description, seller_id) VALUES ('Bluza', 100, 5, 'Czarna bluza z kapturem', 4);
+        INSERT INTO Products(name, price, quantity, description, seller_id) VALUES ('Koszulka', 40, 10, 'Czarna koszulka', 4);
+        INSERT INTO Products(name, price, quantity, description, seller_id) VALUES ('Jajco', 0.9, 48, 'Jedno jajco', 2);
+        INSERT INTO Products(name, price, quantity, description, seller_id) VALUES ('Koszulka', 40, 8, 'Czerwona koszulka', 4);
+        INSERT INTO Products(name, price, quantity, description, seller_id) VALUES ('Kapibara', 200, 2, 'Jedna kapibara', 2);
+        INSERT INTO Products(name, price, quantity, description, seller_id) VALUES ('Telefon', 57, 9, 'Telefon nokia, niezniszczalny', 3);
+        INSERT INTO Products(name, price, quantity, description, seller_id) VALUES ('Madagaskar 2', 35, 1, 'Film na DVD Madagaskar 2', 3);
+");
+
+try{
+    $db->query($sql);
+}
+catch (Exception $e){
     echo $e;
 }
