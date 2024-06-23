@@ -1,9 +1,23 @@
 .container {
-    margin-left: 15%;
+    margin: 0 15%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
 }
 
-table, tr, th, td {
-    border: 1px solid;
+.product {
+    display: flex;
+    max-width: 327px;
+    align-content: center;
+    flex-direction: column;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.under {
+    padding: 10px 20px;
 }
 
 .link {
@@ -15,6 +29,18 @@ table, tr, th, td {
 }
 
 .price {
-    float: right;
+    color: black;
     padding: 4px;
+    float: right;
+    text-align: right;
+}
+
+.productimg {
+    margin-left: 3px;
+    border-radius: 8px;
+    max-width: 100%;
+    max-height: 100%;
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
 }

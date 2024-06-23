@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>O nas - Aledrogo</title>
-    <link rel="stylesheet" href="navbar.css">
+    <style>
+        .body {
+            padding: 30px;
+        }
+    </style>
 </head>
 <body>
 <?php

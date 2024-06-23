@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Kontakt - Aledrogo</title>
+    <style>
+        .body {
+            margin: 30px;
+        }
+    </style>
 </head>
 <?php
 include_once "navbar.php";

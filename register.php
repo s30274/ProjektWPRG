@@ -12,12 +12,17 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     <meta charset="UTF-8">
     <title>Rejestracja - Aledrogo</title>
     <style>
+        .body {
+            margin: 30px;
+        }
         span {color: #cc0000}
         embed {padding: 0; margin: 0}
     </style>
 </head>
-
 <body>
+
+<div class="body">
+<h1>Rejestracja</h1><br>
 <form method="post">
     <input type="text" name="username" placeholder="Nazwa użytkownika"><br><br>
     <input type="text" name="email" placeholder="Adres e-mail"><br><br>
@@ -149,6 +154,7 @@ $sql=("");
 ?>
 
 <br>Masz już konto? <a href="login.php">Zaloguj się</a>
+</div>
 
 </body>
 </html>

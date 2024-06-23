@@ -31,19 +31,29 @@ for($i = 0; $i<8; $i++){
     $select[] = $all[$rand];
     array_splice($all, $rand, 1);
 }
+
+if(isset($_COOKIE['recent'])){
+    $arr = array();
+    $data = $_COOKIE['recent'];
+    $arr = explode(";", $data);
+    $select = array_merge($select, $arr);
+}
+
 echo "<table>";
 
-$index=0;
-$index2=0;
-for($i = 0; $i<2; $i++){
-    echo "<tr>";
-    for($j=0; $j<4; $j++){
-        echo "<td><a href='product.php?id=$select[$index]' class='link'><img src='Products/$select[$index]' width='300' height='300'></a></td>";
-        $index++;
+$index = 0;
+$rowsize = 4;
+$length = ceil(sizeof($select)/4);
+for($i = 0; $i<$length; $i++){
+    if ($i==2){
+        $rowsize = sizeof($arr);
+        echo "</table>";
+        echo "<h2>Ostatnio przeglądane przedmioty</h2>";
+        echo "<table>";
     }
-    echo "</tr><tr>";
-    for($j=0; $j<4; $j++){
-        $sql=("SELECT name, price FROM Products WHERE id='$select[$index2]'");
+    echo "<tr>";
+    for($j=0; $j<$rowsize; $j++){
+        $sql=("SELECT name, price FROM Products WHERE id='$select[$index]'");
         try{
             $result = $db->query($sql);
         }
@@ -51,12 +61,21 @@ for($i = 0; $i<2; $i++){
             echo $e;
         }
         $row=$result->fetch(PDO::FETCH_ASSOC);
-        echo "<td><a href='product.php?id=$select[$index2]' class='link'>".$row['name']."</a><span class='price'>".$row['price']." zł"."</span></td>";
-        $index2++;
+        echo "<td>
+            <div class='product'>
+                <a href='product.php?id=$select[$index]' class='link'><img src='Products/$select[$index]' class='productimg'></a>
+                <div class='under'>
+                    <a href='product.php?id=$select[$index]' class='link'>".$row['name']."</a>
+                    <span class='price'>".$row['price']." zł"."</span>
+                </div>
+            </div>
+        </td>";
+        $index++;
     }
-    echo "<tr>";
+    echo "</tr>";
 }
 echo "</table>";
+setcookie('recent', $_COOKIE['recent'], time()+3600);
 ?>
 </div>
 

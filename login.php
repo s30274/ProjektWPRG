@@ -12,11 +12,16 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     <meta charset="UTF-8">
     <title>Logowanie - Aledrogo</title>
     <style>
+        .body {
+            margin: 30px;
+        }
         span {color: #cc0000}
     </style>
 </head>
-
 <body>
+
+<div class="body">
+<h1>Logowanie</h1><br>
 <form method="post">
     <input type="text" name="email" placeholder="e-mail"><br>
     <input type="password" name="password" placeholder="password">
@@ -63,6 +68,7 @@ function checkLogin($email, $password){
 ?>
 
 <br>Nie masz konta? <a href="register.php">Zarejestruj się</a>
+</div>
 
 </body>
 </html>

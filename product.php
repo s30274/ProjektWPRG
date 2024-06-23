@@ -25,10 +25,33 @@ catch(Exception $e){
 <table>
     <?php
     $row=$result->fetch(PDO::FETCH_ASSOC);
-    echo "<img src='Products/$id' width='500' height='500'>";
+    echo "<img src='Products/$id' alt='$row[name]' width='500' height='500'>";
     echo $row['name'].$row['price']
-    ?>
 
+    ?>
+</table>
+
+<?php
+
+//Dodawanie przedmiotu do kolejki ostatnio przelądanych
+$arr = array();
+if(isset($_COOKIE['recent'])){
+    $data = $_COOKIE['recent'];
+    $arr = explode(";", $data);
+}
+
+if (!in_array($id, $arr))
+{
+    if(sizeof($arr)>=4) {
+        array_splice($arr, 0, 1);
+    }
+    $arr[] = $id;
+}
+$string = implode(";", $arr);
+
+//Ciasteczko ważne przez 1 godzinę
+setcookie('recent', $string, time()+3600);
+?>
 
 </body>
 </html>
