@@ -1,10 +1,10 @@
 <?php
-
+include_once "db.php";
 class AllUsers {
-    private $email, $id;
+    protected $email, $id;
     public function __construct($email) {
+        global $db;
         $this->email=$email;
-        $db = new PDO("mysql:host=localhost;dbname=sklep", "root", "");
         $sql = ("SELECT * FROM Users WHERE email LIKE '$email'");
         $good=true;
         try{

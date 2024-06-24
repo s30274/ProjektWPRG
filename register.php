@@ -1,6 +1,8 @@
 <?php
 session_start();
 include_once "navbar.php";
+include_once "db.php";
+global $db;
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location:loggedin.php");
     exit;
@@ -36,7 +38,6 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 </form>
 
 <?php
-$db = new mysqli("localhost", "root", "", "sklep");
 $sql=("");
 
     $username = $_POST['username'];
@@ -117,11 +118,12 @@ $sql=("");
         }
         $sql=("SELECT COUNT(id) FROM Users WHERE username like '$username'");
         try{
-            $row=mysqli_fetch_array($db->query($sql));
+            $result=$db->query($sql);
         }
         catch(Exception $e){
             echo $e;
         }
+        $row = $result->fetch(PDO::FETCH_ASSOC);
         if($row['COUNT(id)']==0){
             return true;
         }
@@ -135,11 +137,12 @@ $sql=("");
             $emaillow = strtolower($email);
             $sql = ("SELECT COUNT(id) FROM Users WHERE email like '$emaillow'");
             try {
-                $row = mysqli_fetch_array($db->query($sql));
+                $result = $db->query($sql);
             }
             catch(Exception $e){
                 echo $e;
             }
+            $row = $result->fetch(PDO::FETCH_ASSOC);
             if ($row['COUNT(id)'] == 0) {
                 return true;
             } else {

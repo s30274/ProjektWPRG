@@ -1,5 +1,0 @@
-<?php
-
-interface Role{
-
-}

@@ -12,7 +12,6 @@ session_start();
 
 include_once('navbar.php');
 include_once('AllUsers.php');
-include_once('Role.php');
 include_once('ManageProduct.php');
 include_once('Admin.php');
 include_once('Seller.php');

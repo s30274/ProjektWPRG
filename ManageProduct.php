@@ -1,8 +1,8 @@
 <?php
-
+include_once "db.php";
 trait ManageProduct {
     public function addProduct($name, $price, $quantity, $description, $seller_id) {
-        $db = new PDO("mysql:host=localhost;dbname=sklep", "root", "");
+        global $db;
         $sql = ("INSERT INTO Products(name, price, quantity, description, Seller_id) VALUES ('$name', '$price', '$quantity', '$description', '$seller_id')");
         try{
             $db->query($sql);
@@ -15,7 +15,7 @@ trait ManageProduct {
 
 
     public function removeProduct($id) {
-        $db = new PDO("mysql:host=localhost;dbname=sklep", "root", "");
+        global $db;
         $sql = ("DELETE FROM Products WHERE id='$id'
         ");
         $good=true;
@@ -36,7 +36,7 @@ trait ManageProduct {
 
 
     public function updateProduct($id, $name, $price, $quantity, $description, $sellerid) {
-        $db = new PDO("mysql:host=localhost;dbname=sklep", "root", "");
+        global $db;
         $sql = ("UPDATE Products
         SET name='$name', price='$price', quantity='$quantity', description='$description', Seller_id='$sellerid'
         WHERE id='$id'
@@ -79,7 +79,7 @@ trait ManageProduct {
 
 
     public function addImage($image) {
-        $db = new PDO("mysql:host=localhost;dbname=sklep", "root", "");
+        global $db;
         $sql=("SELECT id FROM Products WHERE Seller_id='$_POST[sellerid]' ORDER BY id DESC LIMIT 1");
         try {
             $result = $db->query($sql);
@@ -124,9 +124,9 @@ trait ManageProduct {
 
     public function showManager() {
         //Połączenie z bazą danych
-        $db = new PDO("mysql:host=localhost;dbname=sklep", "root", "");
 
         //Dane do formularza aktualizowania produktu
+        global $db;
         $arr=array("", "", "", "", "add", "Dodaj produkt");
         if(isset($_POST['edit'])){
             $sql=("SELECT * FROM Products WHERE id='$_SESSION[editid]'");

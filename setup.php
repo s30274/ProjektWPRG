@@ -1,5 +1,6 @@
 <?php
-$db = new PDO("mysql:host=localhost;dbname=sklep", "root", "");
+include_once("db.php");
+global $db;
 
 //$nuke=("START TRANSACTION;
 //    DROP TABLE Items;

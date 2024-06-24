@@ -27,6 +27,7 @@ while($row=$result->fetch(PDO::FETCH_ASSOC)){
 }
 ?>
 <div class="container">
+<h2>Wyniki wyszukiwania dla:&ensp;<?php echo $phrase ?></h2>
 <table>
 <?php
 $index = 0;
@@ -36,7 +37,6 @@ for($i = 0; $i<$length; $i++){
     if ($i==($length-1)){
         $rowsize = (sizeof($select)%4);
         echo "</table>";
-        echo "<h2>Ostatnio przeglądane przedmioty</h2>";
         echo "<table>";
     }
     echo "<tr>";
@@ -63,6 +63,7 @@ for($i = 0; $i<$length; $i++){
     echo "</tr>";
 }
 echo "</table>";
+setcookie('recent', $_COOKIE['recent'], time()+3600);
 ?>
 </div>
 </body>

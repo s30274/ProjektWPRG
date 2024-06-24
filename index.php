@@ -9,13 +9,14 @@
 <?php
 session_start();
 include_once "navbar.php";
+include_once "db.php"
 ?>
 
 <div class="container">
 <?php
+global $db;
 $all = array();
 $select = array();
-$db = new PDO("mysql:host=localhost;dbname=sklep", "root", "");
 $sql = ("SELECT id FROM Products ORDER BY id");
 try {
     $result = $db->query($sql);

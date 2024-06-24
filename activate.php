@@ -18,8 +18,9 @@ session_start();
     </form>
 </div>
 <?php
+include_once "db.php";
+global $db;
 if($_SESSION['loggedin']) {
-    $db = new PDO("mysql:host=localhost;dbname=sklep", "root", "");
     $result = $db->query("SELECT * FROM Users WHERE email LIKE '$_SESSION[email]'");
     $row = $result->fetch(PDO::FETCH_ASSOC);
     $active = $row['active'];

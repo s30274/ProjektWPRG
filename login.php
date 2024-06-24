@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once "navbar.php";
+include_once "db.php";
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location:index.php");
     exit;
@@ -48,8 +49,8 @@ if(isset($_POST['login'])) {
     }
 }
 function checkLogin($email, $password){
+    global $db;
     $emaillow=strtolower($email);
-    $db = new PDO("mysql:host=localhost;dbname=sklep", "root", "");
     $result = $db->query("SELECT * FROM Users WHERE email LIKE '$emaillow'");
     $row=$result->fetch(PDO::FETCH_ASSOC);
     if(empty($row)){
