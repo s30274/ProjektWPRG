@@ -54,7 +54,7 @@ city VARCHAR(255) NOT NULL,
 postcode VARCHAR(5) NOT NULL,
 address VARCHAR(255) NOT NULL,
 sum float NOT NULL,
-date date NOT NULL,
+date date DEFAULT CURRENT_DATE,
 done bool DEFAULT 0,
 User_id INT NOT NULL,
 FOREIGN KEY (User_id) REFERENCES Users(id)

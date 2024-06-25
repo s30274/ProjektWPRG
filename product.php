@@ -2,6 +2,7 @@
 session_start();
 include_once "navbar.php";
 include_once "db.php";
+include_once "CookieManager.php";
 if(!isset($_GET['id'])){
     header("Location: index.php");
 } else {
@@ -40,12 +41,21 @@ $row=$result->fetch(PDO::FETCH_ASSOC);
         <h1><?php echo $row['name'] ?></h1>
     </div>
     <div class="price">
+        <?php
+        if($row['quantity']>0){
+        ?>
         <span>Cena: </span><br>
         <h2><?php echo $row['price'] ?> zł</h2>
         <form method="post">
             <input type="number" name="amount" value="1" placeholder="Ilość" class="amount" min="1" max="<?php echo $row['quantity'] ?>"><span> z <?php echo $row['quantity'] ?></span><br>
             <input type="submit" name="addtobasket" value="Dodaj do koszyka" class="button">
         </form>
+        <?php
+        }
+        else {
+            echo "<span>Produkt wyprzedany</span>";
+        }
+        ?>
     </div>
 </div>
 <div class="description">
@@ -54,36 +64,14 @@ $row=$result->fetch(PDO::FETCH_ASSOC);
 </div>
 
 <?php
+$manager = new CookieManager();
 //Dodawanie przedmiotu do koszyka
-//if(isset($_POST['addtobasket'])){
-//    addCookie('basketid', $id);
-//    addCookie('basketquantity', $_POST['amount']);
-//}
-
-//Dodawanie przedmiotu do kolejki ostatnio przelądanych
-addCookie("recent", $id);
-
-//Funkcja która przypisuje wartości tablicy do ciasteczka
-function addCookie($cookie_name, $value) {
-    $arr = array();
-    if(isset($_COOKIE[$cookie_name])){
-        $data = $_COOKIE[$cookie_name];
-        $arr = explode(";", $data);
-    }
-
-    if (!in_array($value, $arr))
-    {
-        if(sizeof($arr)>=4) {
-            array_splice($arr, 0, 1);
-        }
-        $arr[] = $value;
-    }
-    $string = implode(";", $arr);
-
-    //Ciasteczko ważne przez 1 godzinę
-    setcookie($cookie_name, $string, time()+3600);
+if(isset($_POST['addtobasket'])){
+    $manager->addBasket($id, $_POST['amount'], $row['quantity']);
 }
 
+//Dodawanie przedmiotu do kolejki ostatnio przelądanych
+$manager->addRecent($id);
 ?>
 
 </body>

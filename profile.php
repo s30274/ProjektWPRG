@@ -9,7 +9,6 @@
 
 <?php
 session_start();
-
 include_once('navbar.php');
 include_once('AllUsers.php');
 include_once('ManageProduct.php');
@@ -29,6 +28,9 @@ if($_SESSION['loggedin']) {
     } else {
         $user = new User($email);
     }
+}
+else {
+    header("Location:index.php");
 }
 ?>
 

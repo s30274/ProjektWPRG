@@ -1,7 +1,7 @@
 <?php
 include_once "db.php";
 trait ManageProduct {
-    public function addProduct($name, $price, $quantity, $description, $seller_id) {
+    private function addProduct($name, $price, $quantity, $description, $seller_id) {
         global $db;
         $sql = ("INSERT INTO Products(name, price, quantity, description, Seller_id) VALUES ('$name', '$price', '$quantity', '$description', '$seller_id')");
         try{
@@ -14,7 +14,7 @@ trait ManageProduct {
 
 
 
-    public function removeProduct($id) {
+    private function removeProduct($id) {
         global $db;
         $sql = ("DELETE FROM Products WHERE id='$id'
         ");
@@ -35,7 +35,7 @@ trait ManageProduct {
 
 
 
-    public function updateProduct($id, $name, $price, $quantity, $description, $sellerid) {
+    private function updateProduct($id, $name, $price, $quantity, $description, $sellerid) {
         global $db;
         $sql = ("UPDATE Products
         SET name='$name', price='$price', quantity='$quantity', description='$description', Seller_id='$sellerid'
@@ -78,7 +78,7 @@ trait ManageProduct {
 
 
 
-    public function addImage($image) {
+    private function addImage($image) {
         global $db;
         $sql=("SELECT id FROM Products WHERE Seller_id='$_POST[sellerid]' ORDER BY id DESC LIMIT 1");
         try {
@@ -104,7 +104,7 @@ trait ManageProduct {
 
 
 
-    public function updateImage($id, $image) {
+    private function updateImage($id, $image) {
         $target_file = "./Products/".$id;
 
         if ($this->checkImage($image, $target_file)) {

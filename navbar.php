@@ -14,7 +14,7 @@ if(isset($_SESSION['active'])){
     <link rel="stylesheet" href="navbar.css">
 </head>
 <body>
-<div class="logo">
+<div id="logo">
     <a href="index.php"><img src="Images/logo.png" height="75px"></a>
 </div>
 <div class="navbar">
