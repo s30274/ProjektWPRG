@@ -12,6 +12,7 @@ session_start();
 include_once('navbar.php');
 include_once('AllUsers.php');
 include_once('ManageProduct.php');
+include_once('OrdersManager.php');
 include_once('Admin.php');
 include_once('Seller.php');
 include_once('User.php');
@@ -25,8 +26,10 @@ if($_SESSION['loggedin']) {
     } else if ($type === 'seller') {
         $seller = new Seller($email);
         $seller->showManager();
+        $seller->showOrders();
     } else {
         $user = new User($email);
+        $user->showOrders();
     }
 }
 else {
