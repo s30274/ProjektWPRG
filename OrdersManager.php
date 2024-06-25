@@ -16,16 +16,18 @@ trait OrdersManager {
         while($row=$result->fetch(PDO::FETCH_ASSOC)){
             echo "<tr><td>".$row['city']."</td><td>".$row['postcode']."</td><td>".$row['address']."</td><td>".$row['sum']."</td><td>".$row['date']."</td><td>".$row['done']."</td>";
             if(static::class=="Seller"){
-                if(!$row['done']){
+                if($row['done']==0){
                     ?>
+                    <td>
                     <form method="post">
                         <input type="hidden" name="orderid" value="<?php echo $row['id'] ?>">
                         <input type="submit" name="changestatus" value="Zrealizowane">
                     </form>
+                    </td>
                     <?php
-                    echo "</tr>";
                 }
             }
+            echo "</tr>";
         }
         echo "</table></div>";
 
