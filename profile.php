@@ -23,6 +23,7 @@ if($_SESSION['loggedin']) {
     if ($type === 'admin') {
         $admin = new Admin($email);
         $admin->showManager();
+        $admin->showOrders();
     } else if ($type === 'seller') {
         $seller = new Seller($email);
         $seller->showManager();
